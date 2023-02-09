@@ -2,6 +2,7 @@
  * Collection of colors. Will only affect the font-color.
  */
 public class Colors {
+    public static final String BOLD = "\u001b[1m";
     public static final String BLACK = "\u001b[30m";
     public static final String RED = "\u001b[31m";
     public static final String GREEN = "\u001b[32m";

@@ -65,7 +65,8 @@ public class Board {
     private void placeEntities() {
         for (int i = 0; i < ENTITY_AMT; i++) {
             int x,y;
-            int lvl = rand(DIF.getLowestLevel(), DIF.getHighestLevel());
+            int lvl = 1;
+//            int lvl = rand(DIF.getLowestLevel(), DIF.getHighestLevel());
             EntityType[] types = EntityType.values();
             int randNum = rand(0, types.length*3) % types.length;
             Entity e;
@@ -146,7 +147,7 @@ public class Board {
 
     private void monsterDefeated(Entity e) {
         if (e instanceof Monster) {
-            // Replace with a healthpack
+//            getCell();
         }
     }
 
@@ -156,8 +157,28 @@ public class Board {
         }
     }
     
-    private void startCombat(Entity in, Entity op) { Combat c = new Combat(in, op); }
-    public boolean isGameOver() { return getCell(playerLoc).getOccupant().getHealth() <= 0; }
+    private void startCombat(Entity in, Entity op) {
+        Combat c = new Combat(in, op);
+
+        switch (c.getFightCode()) {
+            default:
+            case (short)-1:
+            case 0:
+                System.out.println("A combat error has occurred.");
+                break;
+            case (short)1:
+            case (short)2:
+                System.out.println(c.getDefeatString());
+                break;
+            case (short)3:
+                /* Do nothing as Combat class handles it */
+                break;
+        }
+
+        Main.enterToContinue();
+    }
+
+    public boolean isGameOver() { return getCell(playerLoc).getOccupant().isDefeated(); }
 
     public boolean isGameComplete() {
         for (Entity e: ENTITIES)
@@ -199,7 +220,7 @@ public class Board {
 
         str.append(Colors.GREEN).append("Health: ").append(Colors.BLUE).append(p.getHealth()).append(Colors.GREEN).append(" / ").append(Colors.BLUE).append(p.getMaxHealth()).append("\n");
         str.append(Colors.GREEN).append("Level: ").append(Colors.BLUE).append(p.getLevel()).append("\n");
-        str.append(Colors.GREEN).append("Exp: ").append(Colors.BLUE).append(p.getExp()).append(Colors.GREEN).append(" / ").append(Colors.BLUE).append(p.getExpToLevelUp() * p.getLevel()).append("\n");
+        str.append(Colors.GREEN).append("Exp: ").append(Colors.BLUE).append(p.getExp()).append(Colors.GREEN).append(" / ").append(Colors.BLUE).append(p.getExpToLevelUp() * p.getLevel() + 50).append("\n");
         str.append(Colors.GREEN).append("Damage: ").append(Colors.BLUE).append(p.getDamage()).append("\n");
         //str.append(Colors.GREEN).append(": ").append(Colors.BLUE).append().append(Colors.GREEN).append(" / ").append(Colors.BLUE).append().append("\n");
 

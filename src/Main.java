@@ -49,7 +49,7 @@ public class Main {
             System.out.println(b.getBoardAsString());
 
             movePlayer();
-        } while(!b.isGameOver() || !b.isGameComplete());
+        } while(!b.isGameOver() && !b.isGameComplete());
     }
 
     static boolean stringToDifficulty(String s) {
@@ -123,13 +123,18 @@ public class Main {
         }
     }
 
+    static void enterToContinue() {
+        System.out.println(Colors.YELLOW + "<Press 'Enter' to Continue>" + Colors.RESET);
+        Main.input.nextLine();
+    }
+
     static void exit() {
         System.exit(130);
     }
 
     static void clear() {
         System.out.println("\n\n\n\n\n\n\n");
-        System.out.print("\033[H\033[2J");
+        // System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 

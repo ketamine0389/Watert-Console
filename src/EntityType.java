@@ -1,12 +1,12 @@
 public enum EntityType {
-/*  EXAMPLE (' ', 000, 00, 00.00, 00.00, "")  */
-    PLAYER ('H', 100, 10, 90.00, 01.00, "Player"),
-    HEALTH ('h', 000, 00, 00.00, 00.00, "Health"),
-    ZOMBIE ('Z', 100, 10, 80.00, 01.00, "Zombie"),
-    OGRE   ('O', 150, 15, 85.00, 01.00, "Ogre"),
-    TROLL  ('T', 175, 25, 90.00, 01.00, "Troll"),
-    HUMAN  ('H', 100, 10, 90.00, 01.00, "Human");
-
+/*  EXAMPLE (' ', 000, 00, .00, .00, "")  */
+    PLAYER  ('H', 100, 10, .90, .01, "Player"),
+    HEALTH  ('h', 000, 00, .00, .00, "Health"),
+    ZOMBIE  ('Z', 100, 07, .70, .01, "Zombie"),
+    OGRE    ('O', 150, 12, .75, .01, "Ogre"),
+    TROLL   ('T', 175, 22, .80, .01, "Troll"),
+    HUMAN   ('H', 100, 10, .80, .01, "Human");
+ 
     private final char entChar;
     private final int baseMaxHealth;
     private final int baseDamage;

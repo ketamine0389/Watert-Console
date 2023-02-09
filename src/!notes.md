@@ -16,7 +16,17 @@
 - More brainstorming documented in `#Issues`
 - Begun work on Combat Detection
 - Learned more about `super` and `@Override`
-
+######5/26/2022
+- Continued work on Combat system
+- Broke Combat system
+    - Combat may be broken because of calculations
+######5/27/2022
+- Continued work on Combat system
+- Fixed Combat system
+    - Forgot that we were using percentages
+- Combat system still needs work but is usable :)
+######5/31/2022
+- Picked the project back up
 
 
 # Issues
@@ -30,6 +40,12 @@
 - every iteration of the game loop should check for level updates
   - if players current level is greater than average entity level, increase all entities levels & stats
 - every few iterations may also cause monsters to move
+- damage and accuracy may need tweaked
+    - or tweak `Monster` levels
+
+
+
+# Fixed Issues
 
 
 

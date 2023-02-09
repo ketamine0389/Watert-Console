@@ -91,6 +91,7 @@ public class Entity {
             level = (int) Math.floor((double) exp / expToLevelUp);
             updateMultipliers();
             updateStats();
+            heal(maxHealth);
         }
     }
     
@@ -104,12 +105,15 @@ public class Entity {
     private void calculateAcc() { acc *= accMultiplier; }
     private void calculateCritChance() { critChance *= critChanceMultiplier; }
     
-    public void takeDamage(int incoming) { health -= incoming; }
+    public void takeDamage(int incoming) {
+        health -= incoming;
+        if (health < 0) health = 0;
+    }
     
     public boolean heal(int amt) {
         if (health >= maxHealth) {
             return false;
-        } else if (health + amt == maxHealth) {
+        } else if (health + amt >= maxHealth) {
             health = maxHealth;
         } else {
             health += amt;
@@ -119,10 +123,10 @@ public class Entity {
     
     public int attack() {
         int dmg = damage;
-        double rpa = randPercentage() / acc;
+        double rpa = randPercentage(); // / acc
         double rpcc = randPercentage();
         
-        if (rpa > 10) {
+        if (rpa > .10) {
             double reduction = (1 - rpa) * (acc * 10);
             dmg -= Math.floor(reduction);
             
@@ -134,14 +138,15 @@ public class Entity {
         return dmg;
     }
     
-    public final boolean isDefeated() { return health == 0; }
+    public final boolean isDefeated() { return health <= 0; }
     
     /*
      * Getters / Setters
      */
     
-    public final void setLevel(int level) { this.level = level; }
-    public final void setName(String name) { this.name = name; }
+    public final void setLevel(int level) { exp = level*50; updateLevel(); }
+    protected final void setName(String name) { this.name = name; }
+    protected final void setMaxHealth(int maxHealth) { this.maxHealth = maxHealth; heal(maxHealth); }
     
     public final EntityType getEntType() { return entType; }
     public final char getEntChar() { return entChar; }
